@@ -23,11 +23,6 @@ pip install torch torchvision einops datasets
 > python diffuse_mnist_fashion.py -n 64 /tmp/mnist_fashion.config /tmp/
 
 ```
-<div style="text-align: center">
-<img src="images/mnist-fashion-diffusion.png" width="300">
-<figcaption> forward diffusion process </figcaption>
-</div>
-
 ![forward diffusion process](./images/mnist-fashion-diffusion.png?raw=true "Diffusion")
 
 3. sampling to generate images
@@ -35,7 +30,5 @@ pip install torch torchvision einops datasets
 > python ../../src/sampling.py -n 64 -o /tmp /tmp/mnist_fashion.config /tmp/mnist_fashion.model
 
 ```
-<div style="text-align: center">
-<img src="images/mnist-fashion-sampling.png" width="300">
-<figcaption> sampling process to generate images deterministically  </figcaption>
-</div>
+![sampling process to generate images](./images/mnist-fashion-sampling.png?raw=true "Sampling")
+
