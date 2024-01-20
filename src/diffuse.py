@@ -1,18 +1,19 @@
-# show forward diffusion process (mnist-fashion)
+# show forward diffusion process (mnist)
 
 import torchvision
 from torchvision.utils import save_image
 import dill,sys,getopt
 
 sys.path.append('../../src')
+sys.path.append('.')
 from DDM import *
-from train_mnist_fashion import myload_mnist_fashion, reverse_transform
+from train_model import myload_data, reverse_transform
 
 def get_noisy_image(x_start, t):
   # add noise
   x_noisy = q_sample(x_start, t=t)
 
-  # turn back into PIL image
+  # turn back into image
   noisy_image = reverse_transform(x_noisy)
 
   return noisy_image
@@ -56,7 +57,7 @@ if __name__ == "__main__":
 
   ddm_parameters(config.timesteps)
   
-  dataloader = myload_mnist_fashion(num_of_images)
+  dataloader = myload_data(num_of_images)
   batch = next(iter(dataloader))  # get a random batch from training data
   batch = batch["pixel_values"] 
 

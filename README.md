@@ -7,20 +7,20 @@ pip install torch torchvision einops datasets
 
 ```
 
-## Task 1. mnist-fashion
+## Task 1. **mnist-fashion**
 
 
 1. train UNet models using noisy images
 ```
 > cd DDM/tasks/mnist-fashion
-> python train_mnist_fashion.py -m ddm_noise -t 15 -e 24 -c /tmp/mnist_fashion.config /tmp/mnist_fashion.model
+> python train_model.py -m ddm_noise -t 15 -e 24 -c /tmp/mnist_fashion.config /tmp/mnist_fashion.model
 
 ```
 
 2. generating noisy images in the forward diffusion process
 
 ```
-> python diffuse_mnist_fashion.py -n 64 /tmp/mnist_fashion.config /tmp/
+> python ../../src/diffuse.py -n 64 /tmp/mnist_fashion.config /tmp
 
 ```
 ![forward diffusion process](./images/mnist-fashion-diffusion.png?raw=true "Diffusion")
@@ -31,4 +31,28 @@ pip install torch torchvision einops datasets
 
 ```
 ![sampling process to generate images](./images/mnist-fashion-sampling.png?raw=true "Sampling")
+
+
+## Task 1. **mnist**
+
+1. train UNet models using noisy images
+```
+> cd DDM/tasks/mnist
+> python train_model.py -m ddm_noise -t 15 -e 24 -c /tmp/mnist.config /tmp/mnist.model
+
+```
+
+2. generating noisy images in the forward diffusion process
+```
+> python ../../src/diffuse.py -n 64 /tmp/mnist.config /tmp
+
+```
+![forward diffusion process](./images/mnist-diffusion.png?raw=true "Diffusion")
+
+3. sampling to generate images
+```
+> python ../../src/sampling.py -n 64 -o /tmp /tmp/mnist.config /tmp/mnist.model
+
+```
+![sampling process to generate images](./images/mnist-sampling.png?raw=true "Sampling")
 

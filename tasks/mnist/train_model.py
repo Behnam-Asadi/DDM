@@ -1,4 +1,4 @@
-### Training Script for mnist-fashion ###
+### Training Script for mnist ###
 
 import torch
 from torch.utils.data import DataLoader
@@ -14,7 +14,7 @@ from DDM import *
 
 # define image preprocessing transformations (e.g. using torchvision)
 transform = Compose([
-            transforms.RandomHorizontalFlip(),
+            #transforms.RandomHorizontalFlip(),
             transforms.ToTensor(),  # turn into torch Tensor of shape CHW, divide by 255
             transforms.Lambda(lambda t: (t * 2) - 1)
 ])
@@ -30,8 +30,8 @@ def transforms(examples):
    del examples["image"]
    return examples
 
-def myload_mnist_fashion(batch_size):
-   dataset = load_dataset("fashion_mnist")
+def myload_data(batch_size):
+   dataset = load_dataset("mnist")
 
    # transform image pixels
    transformed_dataset = dataset.with_transform(transforms).remove_columns("label")
@@ -59,7 +59,7 @@ if __name__ == "__main__":
    timesteps = 15 
    epochs = 12
    batch_size = 128
-   config_path = '/tmp/mnist_fasion.config'
+   config_path = '/tmp/mnist_fashion.config'
 
    try:
       opts, args = getopt.getopt(sys.argv[1:],"hm:t:e:b:c:")
@@ -90,7 +90,7 @@ if __name__ == "__main__":
 
    ddm_parameters(timesteps)
 
-   dataloader = myload_mnist_fashion(batch_size)
+   dataloader = myload_data(batch_size)
    image_size = 28
    channels = 1
 
