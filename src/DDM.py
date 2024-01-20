@@ -155,7 +155,7 @@ def sample(model, cfg, image_size, batch_size=16, channels=3):
 
 class DDM_config():
     def __init__(self, device="cuda", epochs=10, timesteps=100, denoising_method='ddm_noise', \
-                config_path="/tmp/config.pickle", image_size=28, channels=1):
+                 config_path="/tmp/config.pickle", image_size=28, channels=1, save_all_models=-1, model_path="/tmp/tmp.model"):
         self.device = device
         self.epochs = epochs
         self.timesteps = timesteps
@@ -163,6 +163,8 @@ class DDM_config():
         self.config_path = config_path
         self.image_size = image_size
         self.channels = channels
+        self.save_all_models = save_all_models
+        self.model_path = model_path
         
 def train_model(model, dataloader, cfg):
   optimizer = Adam(model.parameters(), lr=1e-3)
@@ -185,6 +187,9 @@ def train_model(model, dataloader, cfg):
 
       loss.backward()
       optimizer.step()
+
+    if cfg.save_all_models > 0 and epoch % cfg.save_all_models == 0:
+        torch.save(model, f"{cfg.model_path}_epoch{epoch}")   # save intermediate models 
 
 
 def ddm_parameters(timesteps):
