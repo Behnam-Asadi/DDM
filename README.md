@@ -20,14 +20,14 @@ pip install torch torchvision einops datasets
 2. generating noisy images in the forward diffusion process
 
 ```
-> python ../../src/diffuse.py -n 4 /tmp/mnist_fashion.config /tmp
+> python ../../src/diffuse.py -n 6 /tmp/mnist_fashion.config /tmp
 
 ```
 ![forward diffusion process](./images/mnist-fashion-diffusion.png?raw=true "Diffusion")
 
 3. sampling to generate images
 ```
-> python ../../src/sampling.py -n 6 -o /tmp /tmp/mnist_fashion.config /tmp/mnist_fashion.model
+> python ../../src/sampling.py -n 4 -o /tmp /tmp/mnist_fashion.config /tmp/mnist_fashion.model
 
 ```
 ![sampling process to generate images](./images/mnist-fashion-sampling.png?raw=true "Sampling")
