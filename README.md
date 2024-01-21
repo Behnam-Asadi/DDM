@@ -78,4 +78,4 @@ pip install torch torchvision einops datasets
 > python ../../src/sampling.py -n 4 -o /tmp /tmp/cifar10.config /tmp/cifar10.model
 
 ```
-<img src="./images/cifar10-sampling.png" width="300" />
+<img src="./images/cifar10-sampling.png" width="400" />
