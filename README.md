@@ -78,5 +78,5 @@ pip install torch torchvision einops datasets
 > python ../../src/sampling.py -n 4 -o /tmp /tmp/cifar10.config /tmp/cifar10.model
 
 ```
-![sampling process to generate images](./images/cifar10-sampling.png?raw=true "Sampling")
+![sampling process to generate images](./images/cifar10-sampling.png?raw=true =300x "Sampling")
 
