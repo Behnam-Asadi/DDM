@@ -56,3 +56,27 @@ pip install torch torchvision einops datasets
 ```
 ![sampling process to generate images](./images/mnist-sampling.png?raw=true "Sampling")
 
+
+## Task 3: cifar10
+
+1. train UNet models using noisy images
+```
+> cd DDM/tasks/mnist
+> python train_model.py -m ddm_noise -t 50 -e 1000 -c /tmp/cifar10.config /tmp/cifar10.model
+
+```
+
+2. generating noisy images in the forward diffusion process
+```
+> python ../../src/diffuse.py -n 6 /tmp/cifar10.config /tmp
+
+```
+![forward diffusion process](./images/cifar10-diffusion.png?raw=true "Diffusion")
+
+3. sampling to generate images
+```
+> python ../../src/sampling.py -n 4 -o /tmp /tmp/cifar10.config /tmp/cifar10.model
+
+```
+![sampling process to generate images](./images/cifar10-sampling.png?raw=true "Sampling")
+

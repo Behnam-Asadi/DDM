@@ -189,8 +189,7 @@ def train_model(model, dataloader, cfg):
       optimizer.step()
 
     if cfg.save_all_models > 0 and epoch % cfg.save_all_models == 0:
-        torch.save(model, f"{cfg.model_path}_epoch{epoch}")   # save intermediate models 
-
+        torch.save(model, f"{cfg.model_path}_epoch{epoch}")   # save intermediate models
 
 def ddm_parameters(timesteps):
   global alphas_cumprod,alphas_cumprod_prev,alphas,betas, sqrt_recip_alphas
