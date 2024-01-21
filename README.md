@@ -61,7 +61,7 @@ pip install torch torchvision einops datasets
 
 1. train UNet models using noisy images
 ```
-> cd DDM/tasks/mnist
+> cd DDM/tasks/cifar10
 > python train_model.py -m ddm_noise -t 50 -e 1000 -c /tmp/cifar10.config /tmp/cifar10.model
 
 ```
