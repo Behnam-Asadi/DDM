@@ -3,7 +3,7 @@
 A `pytorch` implementation of deterministic diffusion models for image generation as described in [this post](https://incml.github.io/2023/12/20/Deterministic-Diffusion-Models.html). Source codes were adapted from [The Annotated Diffusion Model](https://huggingface.co/blog/annotated-diffusion).
 
 ```
-pip install torch torchvision einops datasets
+pip install torch torchvision einops datasets torchmetrics Torch-fidelity
 
 ```
 
@@ -79,3 +79,9 @@ pip install torch torchvision einops datasets
 
 ```
 <img src="./images/cifar10-sampling.png" width="400" />
+
+4. evaluating FID-score.
+```
+> python evaluate.py -p path/to/generated/images
+
+```
