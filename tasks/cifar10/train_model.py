@@ -48,8 +48,9 @@ def Usage():
   print("               -t  diffusion timmsteps")
   print("               -e  training epochs")
   print("               -b  training mini-batch size")
+  print("               -l  loss functions: 'l1', 'l2', 'huber'")
   print("               -c  config file to be saved")
-  print("               -g  choose gpu cuda id: 0/1/2/3... (-1: use all gpus)")
+  print("               -g  choose gpu id: 0/1/2/3... (-1: use all gpus)")
   print("")
   exit()
   
@@ -62,9 +63,10 @@ if __name__ == "__main__":
    batch_size = 128
    config_path = '/tmp/mnist_fashion.config'
    cuda_id = 0
+   loss_type = 'l2'
    
    try:
-      opts, args = getopt.getopt(sys.argv[1:],"hm:t:e:b:c:g:")
+      opts, args = getopt.getopt(sys.argv[1:],"hm:t:e:b:c:g:l:")
    except getopt.GetoptError:
        Usage()
    if len(args) != 1:
@@ -85,10 +87,12 @@ if __name__ == "__main__":
          config_path = arg
       elif opt == '-g':
          cuda_id = int(arg)
+      elif opt == '-l':
+         loss_type = arg
 
    model_path = args[0]
 
-   print(f"timesteps={timesteps} epochs={epochs} batch_size={batch_size} denoising_method={denoising_method}")
+   print(f"timesteps={timesteps} epochs={epochs} batch_size={batch_size} loss_type={loss_type} denoising_method={denoising_method}")
 
    ### training starts HERE ...
 
@@ -117,7 +121,7 @@ if __name__ == "__main__":
    print(f"using device: {device}") 
 
    config = DDM_config(device, epochs=epochs, timesteps=timesteps, denoising_method=denoising_method, image_size=image_size, \
-                       channels=channels, config_path=config_path, model_path=model_path, save_all_models=100)
+                       channels=channels, config_path=config_path, model_path=model_path, save_all_models=100, loss_type=loss_type)
 
    # Save the config file
    dill.dump(config, file = open(config.config_path, "wb"))

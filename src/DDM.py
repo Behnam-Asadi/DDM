@@ -155,7 +155,8 @@ def sample(model, cfg, image_size, batch_size=16, channels=3):
 
 class DDM_config():
     def __init__(self, device="cuda", epochs=10, timesteps=100, denoising_method='ddm_noise', \
-                 config_path="/tmp/config.pickle", image_size=28, channels=1, save_all_models=-1, model_path="/tmp/tmp.model"):
+                 config_path="/tmp/config.pickle", image_size=28, channels=1, save_all_models=-1, \
+                 model_path="/tmp/tmp.model", loss_type="l2"):
         self.device = device
         self.epochs = epochs
         self.timesteps = timesteps
@@ -165,6 +166,7 @@ class DDM_config():
         self.channels = channels
         self.save_all_models = save_all_models
         self.model_path = model_path
+        self.loss_type = loss_type
         
 def train_model(model, dataloader, cfg):
   optimizer = Adam(model.parameters(), lr=1e-3)
@@ -179,8 +181,7 @@ def train_model(model, dataloader, cfg):
       # Algorithm 1 line 3: sample t uniformally for every example in the batch
       t = torch.randint(0, cfg.timesteps, (batch_size,), device=cfg.device).long()
 
-      ### loss = p_losses(model, batch, t, loss_type="huber")
-      loss = p_losses(model, batch, t, cfg.denoising_method, loss_type="l2" )
+      loss = p_losses(model, batch, t, cfg.denoising_method, loss_type=cfg.loss_type)
 
       if step == 0:
         print(f"epoch {epoch}: Loss = {loss.item()}")
