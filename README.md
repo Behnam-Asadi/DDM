@@ -27,7 +27,7 @@ pip install torch torchvision einops datasets torchmetrics Torch-fidelity
 
 3. sampling to generate images
 ```
-> python ../../src/sampling.py -n 4 -o /tmp /tmp/mnist_fashion.config /tmp/mnist_fashion.model
+> python ../../src/sampling.py -m -n 4 -o /tmp /tmp/mnist_fashion.config /tmp/mnist_fashion.model
 
 ```
 ![sampling process to generate images](./images/mnist-fashion-sampling.png?raw=true "Sampling")
@@ -51,7 +51,7 @@ pip install torch torchvision einops datasets torchmetrics Torch-fidelity
 
 3. sampling to generate images
 ```
-> python ../../src/sampling.py -n 4 -o /tmp /tmp/mnist.config /tmp/mnist.model
+> python ../../src/sampling.py -m -n 4 -o /tmp /tmp/mnist.config /tmp/mnist.model
 
 ```
 ![sampling process to generate images](./images/mnist-sampling.png?raw=true "Sampling")
