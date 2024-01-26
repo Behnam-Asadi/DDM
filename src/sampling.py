@@ -87,19 +87,20 @@ ddm_parameters(config.timesteps)
 # sampling images
 samples = []
 x0_hats = []
-for b in range(0,num_of_images//block_size):
-  sam, x0 = sample(model, config, image_size=config.image_size, batch_size=block_size, channels=config.channels)  
-  samples.append(sam)
-  x0_hats.append(x0)
+for t in range(0,num_of_images//block_size):
+  sam, x0 = sample(model, config, image_size=config.image_size, batch_size=block_size, channels=config.channels)
+  if save_all_images == False:
+    for n in range(0,block_size):   # directly save final x0 images 
+      save_image((x0[config.timesteps-1][n]+1)/2 , f"{save_path}/x0-hat_t{config.timesteps-1}_b{t}_n{n}.png")
+                                # un-normalized images
+  else:
+    samples.append(sam)
+    x0_hats.append(x0)
 
-images = []
 if save_all_images == False:
-  for i in range(0,num_of_images):
-    images.append(x0_hats[i//block_size][config.timesteps-1][i%block_size])
-    save_image((x0_hats[i//block_size][config.timesteps-1][i%block_size]+1)/2 , f"{save_path}/x0-hat_t{config.timesteps-1}_i{i}.png")
-                                             # un-normalized images
   print(f"saving all final images x0 into {save_path}")
-else:
+else:    
+  images = []
   for i in range(0,num_of_images):
     for t in reversed(range(config.timesteps-1, -1, -plot_step)):
       images.append(samples[i//block_size][t][i%block_size])
