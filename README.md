@@ -75,7 +75,7 @@ pip install torch torchvision einops datasets torchmetrics Torch-fidelity
 
 3. sampling to generate images
 ```
-> python ../../src/sampling.py -n 4 -o /tmp /tmp/cifar10.config /tmp/cifar10.model
+> python ../../src/sampling.py -m -n 4 -o /tmp /tmp/cifar10.config /tmp/cifar10.model
 
 ```
 <img src="./images/cifar10-sampling.png" width="400" />
